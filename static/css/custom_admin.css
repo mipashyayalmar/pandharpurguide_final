@@ -1,0 +1,122 @@
+/* Custom Admin Styles */
+body {
+    background: linear-gradient(to right, #e0e0e0, #fcca25);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Admin Logo Styling */
+.img-circle {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    transition: transform 0.3s ease-in-out, opacity 0.3s;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+    width: 100px;
+}
+
+.img-circle:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+/* Login Box */
+.login-box {
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+/* Input Fields */
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: #2575fc;
+    box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+}
+
+/* Submit Button */
+.login-box button[type="submit"] {
+    background: #2575fc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-box button[type="submit"]:hover {
+    background: #1a5dc7;
+    transform: translateY(-2px);
+}
+
+/* Smooth Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Error Messages */
+.error-message {
+    color: #ff3e3e;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(255, 62, 62, 0.1);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .img-circle {
+        max-width: 80px;
+    }
+    .login-box {
+        width: 90%;
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .img-circle {
+        max-width: 60px;
+    }
+    .login-box {
+        padding: 15px;
+    }
+    .login-box input,
+    .login-box button[type="submit"] {
+        padding: 8px 15px;
+    }
+}

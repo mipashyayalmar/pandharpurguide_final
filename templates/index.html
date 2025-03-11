@@ -1,0 +1,699 @@
+    {% extends 'basic.html' %}
+    {% block title %}Hotel Krishna
+    {% endblock title %}
+
+    {%load static%}
+    {% load app_tags %}
+
+
+
+{% block body %}
+<html>
+ <head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    
+    }
+
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+        from { transform: scale(0.95); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .header {
+        background-color: #fce8d5;
+        padding: 1rem 0;
+        animation: fadeIn 1s ease-out;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .header p {
+        margin: 0;
+        color: black;
+        margin-top: 3px;
+        color:#a39b72;
+        font-family: 'LD Engraved Regular', serif; 
+        font-weight: 700;
+        font-size: 35px;
+        padding-left: 23%;
+    }
+
+    .header h1 {
+        color: #8b0000;
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    .grid-container {
+        padding: 2rem;
+        margin: 0 auto;
+        max-width: 1400px;
+    }
+
+
+
+    .header .helpline {
+        color: red;
+        font-size: 33px;
+        position: absolute;
+        top: 13px;
+        right: 6px;
+        font-family: 'LD Engraved Regular', serif;
+        font-weight: 600;
+    }
+
+    @media and (min-screen:720px){
+        .header .helpline {
+            right: 94px;
+        }
+        
+    }
+    .header .login {
+        position: absolute;
+        top: 10px;
+        right: 150px;
+        color: orange;
+    }
+    
+   
+    /* Dropdown Menu */
+    .dropdown {
+        position: relative;
+        margin: 5px;
+    }
+
+    .dropdown .dropbtn {
+        background-color: orange;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: orange;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        font-size: 14px;
+        border-bottom: 1px solid darkorange;
+    }
+
+    .dropdown-content a:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown-content a:hover {
+        background-color: darkorange;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: darkorange;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .nav {
+            flex-direction: column;
+        }
+
+        .nav a, .dropdown .dropbtn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .dropdown-content {
+            position: relative;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .dropdown .dropbtn {
+            padding: 10px 0px;
+        }
+    }
+
+    
+
+    @media (max-width: 480px) {
+        .header h1 {
+            font-size: 18px;
+        }
+
+        .header p {
+            font-size: 12px;
+        }
+
+        .header .helpline, .header .login {
+            font-size: 12px;
+        }
+
+        .nav a {
+            font-size: 12px;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 12px;
+        }
+
+        .dropdown-content a {
+            font-size: 12px;
+        }
+    }
+    .content {
+        text-align: center;
+        padding: 20px;
+    }
+    .content img {
+        width: 100%;
+        max-width: 1000px;
+        height: auto;
+    }
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 30px;
+        color: orange;
+        cursor: pointer;
+    }
+    .arrow.left {
+        left: 10px;
+    }
+    .arrow.right {
+        right: 10px;
+    }
+
+    .header1 {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 7px 78px 0px 0px;
+        background-color: white;
+    }
+    .header1 a {
+        text-decoration: none;
+        color: #ff6600;
+        font-size: 16px;
+        margin-right: 20px;
+        display: flex;
+        align-items: center;
+    }
+    .header1 a i {
+        margin-left: 5px;
+    }
+    .header1 .button {
+        background-color: #ff6600;
+        color: white;
+        border: none;
+        padding: 5px 15px;
+        margin-right: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+
+<style>
+    /* Import Font Awesome from CDN */
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+    
+    /* Navbar Styles */
+    .nav {
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 1rem;
+        position: relative;
+    }
+    
+    .nav-brand {
+        display: flex;
+        align-items: center;
+    }
+    
+    .nav-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    
+    .brand-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    /* Hamburger Button Styles */
+    .nav-toggle {
+        position: absolute;
+        right: 1rem;
+        top: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 100;
+    }
+    
+    .hamburger {
+        display: block;
+        position: relative;
+        width: 24px;
+        height: 2px;
+        background: #333;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .hamburger::before,
+    .hamburger::after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 2px;
+        background: #333;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .hamburger::before {
+        transform: translateY(-8px);
+    }
+    
+    .hamburger::after {
+        transform: translateY(8px);
+    }
+    
+    /* Animated hamburger when active */
+    .nav-toggle.active .hamburger {
+        background: transparent;
+    }
+    
+    .nav-toggle.active .hamburger::before {
+        transform: rotate(45deg);
+    }
+    
+    .nav-toggle.active .hamburger::after {
+        transform: rotate(-45deg);
+    }
+    
+    /* Navigation Links */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-top: 1rem;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    /* Dropdown Styles */
+    .dropdown {
+        position: relative;
+    }
+    
+    .dropbtn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #333;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .dropbtn:hover {
+        background-color: #f5f5f5;
+    }
+    
+    .toggle-icon {
+        margin-left: auto;
+        transition: transform 0.3s ease;
+    }
+    
+    .dropdown.active .toggle-icon {
+        transform: rotate(45deg);
+    }
+    
+    .dropdown-content {
+        display: none;
+        background-color: #fff;
+        min-width: 200px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+    
+    .dropdown-content a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        color: #333;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+    
+    .dropdown-content a:hover {
+        background-color: #f5f5f5;
+    }
+    
+    /* Responsive Styles */
+    @media (min-width: 768px) {
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 2rem;
+        }
+    
+        .nav-toggle {
+            display: none;
+        }
+    
+        .nav-links {
+            display: flex !important;
+            flex-direction: row;
+            padding-top: 0;
+            gap: 1rem;
+        }
+    
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+        }
+    }
+    </style>
+ </head>
+ <body>
+  
+  <section>
+   <div class="container-fluid py-5 px-5">
+    <form action="" method="POST">
+     {% csrf_token %}
+     <div class="row justify-content-center py-5 bg-light">
+      <div class="col-lg-4">
+       <label for="">
+        Location
+       </label>
+       <select class="form-control" id="roomstatus" name="search_location">
+        <option>
+         Location
+        </option>
+        {% for each_location, each_hotel_id in all_location %}
+        <option value="{{each_hotel_id}}">
+         {{each_location}}
+        </option>
+        {% endfor %}
+       </select>
+      </div>
+
+      <div class="col-lg-2">
+        <label for="">Check in</label>
+        <input class="form-control mr-sm-2" type="date" placeholder="Check in" name="cin" min={%todays_date%} aria-label="Search" required="True">
+    </div>
+    <div class="col-lg-2">
+        <label for="">Check Out</label>
+        <input class="form-control mr-sm-2" type="date" placeholder="Check out" name="cout" min={%tommorow%}  aria-label="Search" required="True">
+    </div>
+      <div class="col-lg-2">
+       <label for="">
+        Person
+       </label>
+       <input aria-label="Search" class="form-control mr-sm-2" name="capacity" placeholder="Person" required="True" type="number"/>
+      </div>
+      <div class="col-lg-2">
+       <input class="form-control mr-sm-2 btn btn-primary my-4" style="position: relative; top: 7px;" type="submit" value="Check Availabilty"/>
+      </div>
+      {% if rooms %}
+      <p class="text-center text-success">
+       Rooms Available
+      </p>
+      {% endif %}
+     </div>
+    </form>
+   </div>
+  </section>
+  <div class="container">
+   <div class="row">
+    <div class="col-12 col-md-4 col-lg-2">
+     <div class="filter-box">
+      <h5>
+       Filter Rooms
+      </h5>
+      <div class="amenities-filter">
+       <input class="amenity-filter" data-amenity="ac" id="ac" type="checkbox"/>
+       <label for="ac">
+        AC
+       </label>
+       <br/>
+       <input class="amenity-filter" data-amenity="fan" id="fan" type="checkbox"/>
+       <label for="fan">
+        Fan
+       </label>
+       <br/>
+       <input class="amenity-filter" data-amenity="wifi" id="wifi" type="checkbox"/>
+       <label for="wifi">
+        Wi-Fi
+       </label>
+       <br/>
+       <input class="amenity-filter" data-amenity="parking" id="parking" type="checkbox"/>
+       <label for="parking">
+        Parking
+       </label>
+       <br/>
+       <input class="amenity-filter" data-amenity="heater" id="heater" type="checkbox"/>
+       <label for="heater">
+        Heater
+       </label>
+       <br/>
+       <input class="amenity-filter" data-amenity="food_facility" id="food_facility" type="checkbox"/>
+       <label for="food_facility">
+        Food Facility
+       </label>
+       <br/>
+      </div>
+     </div>
+    </div>
+    <div class="col-12 col-md-8 col-lg-9">
+     <div class="row" id="room-list">
+      {% for each_room in rooms %}
+                        {% if each_room.get_status_display == 'available' %}
+      <div class="col-12 col-md-6 col-lg-4 room-card" data-ac="{{ each_room.ac }}" data-fan="{{ each_room.fan }}" data-food_facility="{{ each_room.food_facility }}" data-heater="{{ each_room.heater }}" data-parking="{{ each_room.parking }}" data-room-id="{{ each_room.id }}" data-wifi="{{ each_room.wifi }}">
+       <div class="card h-100">
+        <div class="carousel slide" data-bs-ride="carousel" id="carousel{{ each_room.id }}">
+         <div class="carousel-inner">
+          <div class="carousel-item active">
+           {% if each_room.image1 %}
+           <img alt="Room Image 1" class="img-fluid gallery-img" onclick="openModal(this)" src="{{ each_room.image1.url }}"/>
+           {% else %}
+           <img alt="Placeholder image of a room with a bed and a window" class="img-fluid gallery-img" height="400" src="https://storage.googleapis.com/a1aa/image/XxpfEpNg3HwQD6R0z5W1h4ibliSpdZLILNu8iUNIrXIZelIUA.jpg" width="600"/>
+           {% endif %}
+          </div>
+         </div>
+        </div>
+        <div class="card-body">
+         <h5 class="card-title">
+          {{ each_room.hotel.name }} - Room {{ each_room.room_number }}
+         </h5>
+         <center>
+          <p class="card-text" style="color:Violet;">
+           {{ each_room.heading }}
+          </p>
+         </center>
+         <p class="card-text">
+          {{ each_room.description }}
+         </p>
+         <div class="location mb-2">
+          <i class="fas fa-map-marker-alt me-2">
+          </i>
+          {{ each_room.hotel.location }}
+         </div>
+         <div class="row details-row">
+          <div class="col-6">
+           <p>
+            <strong>
+             Check-In:
+            </strong>
+            {{ each_room.check_in_time|default_if_none:"N/A" }}
+            <br/>
+            <strong>
+             Food Facility:
+            </strong>
+            {{ each_room.food_facility|yesno:"Yes,No" }}
+           </p>
+          </div>
+          <div class="col-6">
+           <p>
+            <strong>
+             Check-Out:
+            </strong>
+            {{ each_room.check_out_time|default_if_none:"N/A" }}
+            <br/>
+            <strong>
+             Parking:
+            </strong>
+            {{ each_room.parking|yesno:"Yes,No" }}
+           </p>
+          </div>
+         </div>
+         <div class="select-room text-end mt-3">
+            <a href="{% url 'bookroompage' %}?roomid={{ each_room.id }}">
+           <button class="button-57" role="button">
+            <span class="text">
+             Book Now
+            </span>
+            <span>
+            </span>
+           </button>
+          </a>
+         </div>
+        </div>
+       </div>
+      </div>
+      {% endif %}
+                    {% endfor %}
+     </div>
+    </div>
+   </div>
+  </div>
+  <div aria-hidden="true" aria-labelledby="imageModalLabel" class="modal fade" id="imageModal" tabindex="-1">
+   <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+     <button aria-label="Close" class="close-button" data-bs-dismiss="modal">
+      ×
+     </button>
+     <img alt="Expanded View" id="modalImage" src=""/>
+    </div>
+   </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+  </script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+{% comment %} this for the filter purpose  {% endcomment %}
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    // Add event listeners to amenity checkboxes
+                    const amenityFilters = document.querySelectorAll(".amenity-filter");
+            
+                    amenityFilters.forEach(function(filter) {
+                        filter.addEventListener("change", function() {
+                            // Get the selected amenities
+                            const selectedAmenities = getSelectedAmenities();
+            
+                            // Filter rooms based on selected amenities
+                            filterRooms(selectedAmenities);
+                        });
+                    });
+                });
+            
+                // Function to get selected amenities from checkboxes
+                function getSelectedAmenities() {
+                    const selectedAmenities = [];
+            
+                    const amenityFilters = document.querySelectorAll(".amenity-filter:checked");
+                    amenityFilters.forEach(function(filter) {
+                        selectedAmenities.push(filter.getAttribute("data-amenity"));
+                    });
+            
+                    return selectedAmenities;
+                }
+            
+                // Function to filter rooms based on selected amenities
+                function filterRooms(selectedAmenities) {
+                    const rooms = document.querySelectorAll(".room-card");
+            
+                    rooms.forEach(function(room) {
+                        let matches = true;
+            
+                        // For each selected amenity, check if the room has the corresponding attribute with value "True"
+                        selectedAmenities.forEach(function(amenity) {
+                            const roomAmenity = room.getAttribute("data-" + amenity);
+                            // If the room doesn't have the selected amenity (or if it's not true), hide it
+                            if (roomAmenity !== "True") {
+                                matches = false;
+                            }
+                        });
+            
+                        // Show or hide the room based on whether it matches the selected amenities
+                        if (matches) {
+                            room.style.display = "block"; // Show room if matches
+                        } else {
+                            room.style.display = "none"; // Hide room if doesn't match
+                        }
+                    });
+                }
+
+
+
+
+                // ------------------------
+                function openModal(img) {
+                var modal = document.getElementById('imageModal');
+                var modalImg = document.getElementById('modalImage');
+                modalImg.src = img.src;
+                $(modal).modal('show');
+                // ----------------
+                function openModal(img) {
+                    const modalImage = document.getElementById('modalImage');
+                    modalImage.src = img.src; // Set the modal image source to the clicked image source
+                    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                    modal.show();
+                }
+        }
+            </script>
+            
+            
+ </body>
+</html>
+
+    {% endblock body %}
+   
+   

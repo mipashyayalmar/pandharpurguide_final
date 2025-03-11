@@ -1,0 +1,573 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Home - Pandharpur Guide{% endblock %}
+{% block content %}
+
+<style>
+    
+
+    .advertisements-left-side, .advertisements-right-side {
+        position: fixed;
+        top: 29%;
+        width: 278px;
+    }
+
+    .advertisements-left-side {
+        left: 0;
+    }
+
+    .advertisements-right-side {
+        right: 0;
+    }
+
+    .advertisements-below-page {
+        position: relative;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .advertisement {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin: 20px auto;
+        max-width: 300px;
+        text-align: center;
+        position: relative;
+        background-color: #f9f9f9;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        display: none; /* Initially hidden */
+    }
+
+    .advertisement img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .cancel-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .cancel-btn:hover {
+        background: darkred;
+    }
+
+    .fade-in {
+        animation-name: fadeIn;
+    }
+
+    .fade-out {
+        animation-name: fadeOut;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+    }
+
+
+
+
+/* second */
+    #image-management {
+        display: none;
+    }
+
+
+
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+    }
+
+    .darshan {
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 1000px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .darshan:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .darshan p {
+        color: #e53935;
+        font-size: 25px;
+        margin: 15px 0;
+        animation: fadeInText 1.5s ease-in-out;
+    }
+
+    .darshan h2 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 30px;
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .darshan h3 {
+        font-size: 20px;
+        color: #555;
+        line-height: 1.6;
+        animation: slideUp 1.5s ease;
+    }
+
+    .darshan img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .darshan:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Popup styles */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        overflow: auto;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .popup-content {
+        position: relative;
+        margin: 50px auto;
+        max-width: 58%;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        animation: zoomIn 0.5s ease;
+    }
+
+    @media (max-width: 768px) {
+        
+        .popup-content {
+            max-width: 90%;
+             
+        }
+    
+    }
+
+
+    .popup-content img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .close-btn {
+        position: absolute;
+        right: 8px;
+        top: -1px;
+        font-size: 30px;
+        color: #333;
+        cursor: pointer;
+    }
+
+    .fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2000;
+        background: white;
+        overflow: auto;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes zoomIn {
+        from {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeInText {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .darshan {
+            padding: 15px;
+        }
+
+        .darshan h2 {
+            font-size: 28px;
+        }
+
+        .darshan p {
+            font-size: 20px;
+        }
+
+        .darshan h3 {
+            font-size: 18px;
+        }
+
+        .popup-content {
+            margin:50% 20px;
+        }
+    }
+
+
+
+
+    .content {
+        position: relative;
+        max-width: 1000px;
+        margin: auto;
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .carousel-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        will-change: transform;
+    }
+
+    .carousel img {
+        width: 1000px;
+        height: 500px;
+        flex-shrink: 0;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        color: black;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .arrow.left {
+        left: 20px;
+    }
+
+    .arrow.right {
+        right: 20px;
+    }
+
+    .arrow:hover {
+        background: rgba(255, 251, 251, 0.7);
+    }
+
+    .image-details {
+        margin-top: 20px;
+        color: #333;
+        text-align: center;
+    }
+
+    .image-details h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .image-details p {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    .image-counter {
+        font-size: 1.2rem;
+        color: #666;
+    }
+
+</style>
+
+<link rel="stylesheet" href="{% static 'home/home.css' %}">
+<div class="advertisements">
+    {% for ad in advertisements %}
+        {% if ad.position == "below-menu" %}
+            <div class="advertisement fade-in" id="ad-below-menu-{{ forloop.counter }}">
+                <button class="cancel-btn" onclick="cancelAd('ad-below-menu-{{ forloop.counter }}')">X</button>
+                <img src="{{ ad.image.url }}" alt="{{ ad.title }}" />
+                <h3>{{ ad.title }}</h3>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="advertisements-left-side">
+    {% for ad in advertisements %}
+        {% if ad.position == "left-side-of-page" %}
+            <div class="advertisement fade-in" id="ad-left-side-{{ forloop.counter }}">
+                <button class="cancel-btn" onclick="cancelAd('ad-left-side-{{ forloop.counter }}')">X</button>
+                <img src="{{ ad.image.url }}" alt="{{ ad.title }}" />
+                <h3>{{ ad.title }}</h3>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="advertisements-right-side">
+    {% for ad in advertisements %}
+        {% if ad.position == "right-side-of-page" %}
+            <div class="advertisement fade-in" id="ad-right-side-{{ forloop.counter }}">
+                <button class="cancel-btn" onclick="cancelAd('ad-right-side-{{ forloop.counter }}')">X</button>
+                <img src="{{ ad.image.url }}" alt="{{ ad.title }}" />
+                <h3>{{ ad.title }}</h3>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    <div class="carousel-container">
+        <div class="arrow left" onclick="previousImage()">❮</div>
+        <div class="carousel">
+            {% for image in images %}
+                <img alt="{{ image.heading }}" src="{{ image.image.url }}" />
+            {% endfor %}
+        </div>
+        <div class="arrow right" onclick="nextImage()">❯</div>
+    </div>
+    <div class="image-details">
+        <h2 id="image-heading">{{ images.0.heading }}</h2>
+        <div class="image-counter">
+            <span id="current-index">1</span>/<span id="total-images">{{ images|length }}</span>
+        </div>
+    </div>
+</div>
+
+<!-- Image Management -->
+<div id="image-management">
+    <h2>Manage Images</h2>
+    <div class="image-list">
+        {% for image in images %}
+        <div class="image-item">
+            <img src="{{ image.image.url }}" alt="{{ image.heading }}">
+            <input type="text" value="{{ image.heading }}" placeholder="Heading" data-index="{{ forloop.counter0 }}">
+            <textarea placeholder="Description" data-index="{{ forloop.counter0 }}">{{ image.description }}</textarea>
+            <button onclick="saveEdit({{ forloop.counter0 }})">Save</button>
+        </div>
+        {% endfor %}
+    </div>
+    <h2>Add New Image</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Image</button>
+    </form>
+</div>
+
+<div class="darshan-section">
+    {% for image in images %}
+    <div class="darshan" data-aos="zoom-in">
+        <h2>Top Places to Visit in Pandharpur Darshan</h2>
+        <p><b>{{ forloop.counter }}. {{ image.heading }}</b></p>
+        <img src="{{ image.image.url }}" alt="{{ image.heading }}">
+        <h3>{{ image.description }}</h3>
+    </div>
+    {% endfor %}
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'home/home.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const ads = document.querySelectorAll('.advertisement');
+        ads.forEach((ad, index) => {
+            setTimeout(() => {
+                showAd(ad.id);
+            }, index * 1000);
+        });
+    
+        const totalImages = document.querySelectorAll('.carousel img').length;
+        document.getElementById('total-images').textContent = totalImages;
+        updateCarousel();
+    });
+    
+    function showAd(adId) {
+        const adElement = document.getElementById(adId);
+        if (adElement) {
+            adElement.classList.add('fade-in');
+            adElement.style.display = 'block';
+        }
+    }
+    
+    function cancelAd(adId) {
+        const adElement = document.getElementById(adId);
+        if (adElement) {
+            adElement.classList.remove('fade-in');
+            adElement.classList.add('fade-out');
+            setTimeout(() => {
+                adElement.style.display = 'none';
+                adElement.classList.remove('fade-out');
+                setTimeout(() => showAd(adId), 5000);
+            }, 500);
+        }
+    }
+    
+    let currentIndex = 0;
+    
+    function updateCarousel() {
+        const carousel = document.querySelector('.carousel');
+        const offset = -currentIndex * 1000;
+        carousel.style.transform = `translateX(${offset}px)`;
+    
+        const headings = document.querySelectorAll('.image-item input');
+        const descriptions = document.querySelectorAll('.image-item textarea');
+    
+        document.getElementById('image-heading').textContent = headings[currentIndex].value;
+        document.getElementById('image-description').textContent = descriptions[currentIndex].value;
+        document.getElementById('current-index').textContent = currentIndex + 1;
+    }
+    
+    function previousImage() {
+        const images = document.querySelectorAll('.carousel img');
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+        updateCarousel();
+    }
+    
+    function nextImage() {
+        const images = document.querySelectorAll('.carousel img');
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        updateCarousel();
+    }
+    
+    function saveEdit(index) {
+        const heading = document.querySelectorAll('.image-item input')[index].value;
+        const description = document.querySelectorAll('.image-item textarea')[index].value;
+    
+        console.log(`Save heading: ${heading}, description: ${description}`);
+    }
+    
+    // AOS Initialization
+    AOS.init({
+        duration: 1000,
+        once: true,
+        easing: 'ease-in-out',
+    });
+    
+    // Popup Functionality
+    document.querySelectorAll('.darshan img').forEach(image => {
+        image.addEventListener('click', function (event) {
+            event.stopPropagation();
+    
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <span class="close-btn">&times;</span>
+                    <img src="${this.src}" alt="Full Size Image">
+                </div>
+            `;
+    
+            document.body.appendChild(popup);
+            popup.style.display = 'block';
+    
+            popup.addEventListener('dblclick', function () {
+                this.querySelector('.popup-content').classList.toggle('fullscreen');
+            });
+    
+            popup.querySelector('.close-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                popup.remove();
+            });
+    
+            popup.addEventListener('click', function (e) {
+                if (e.target === popup) {
+                    popup.remove();
+                }
+            });
+        });
+    });
+    
+</script>
+
+{% endblock content %}

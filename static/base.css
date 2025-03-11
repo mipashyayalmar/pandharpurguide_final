@@ -1,0 +1,219 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.header {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+}
+.header h1 {
+    padding-right:80%;
+    margin: 0;
+    color: hsl(27.48deg 84.42% 49.95%);
+    font-size:20px;
+    font-weight: 800;
+}
+.header p {
+    margin: 0;
+    color: black;
+    padding-right: 75%;
+    margin-top: 3px;
+    color:#a39b72;
+    font-family: 'LD Engraved Regular', serif; 
+    font-weight: 700;
+}
+
+.header .helpline {
+    color: red;
+    font-size: 33px;
+    position: absolute;
+    top: 13px;
+    right: 94px;
+    font-family: 'LD Engraved Regular', serif;
+    font-weight: 600;
+}
+.header .login {
+    position: absolute;
+    top: 10px;
+    right: 150px;
+    color: orange;
+}
+
+/* Navigation Bar Styles */
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: orange;
+    padding: 10px 0px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+.nav a:hover {
+    background-color: darkorange;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+    margin: 5px;
+}
+
+.dropdown .dropbtn {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: orange;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid darkorange;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: darkorange;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: darkorange;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+    }
+
+    .nav a, .dropdown .dropbtn {
+        width: 85%;
+        text-align: center;
+    }
+
+    .dropdown-content {
+        position: relative;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 18px;
+    }
+
+    .header p {
+        font-size: 12px;
+    }
+
+    .header .helpline, .header .login {
+        font-size: 12px;
+    }
+
+    .nav a {
+        font-size: 12px;
+    }
+
+    .dropdown .dropbtn {
+        font-size: 12px;
+    }
+
+    .dropdown-content a {
+        font-size: 12px;
+    }
+}
+.content {
+    text-align: center;
+    padding: 20px;
+}
+.content img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+}
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: orange;
+    cursor: pointer;
+}
+.arrow.left {
+    left: 10px;
+}
+.arrow.right {
+    right: 10px;
+}
+
+.header1 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 7px 78px 0px 0px;
+    background-color: white;
+}
+.header1 a {
+    text-decoration: none;
+    color: #ff6600;
+    font-size: 16px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+.header1 a i {
+    margin-left: 5px;
+}
+.header1 .button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
